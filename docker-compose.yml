@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  go_backend:
+    container_name: "go_backend_newpet"
+    build: server/
+    env_file:
+      - .env
+    networks:
+      - default
+    restart: always
