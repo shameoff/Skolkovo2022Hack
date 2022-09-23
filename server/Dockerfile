@@ -7,12 +7,12 @@ RUN mkdir /build
 WORKDIR /build
 
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -v -o server ./server
+RUN go build main.go
 
 # Stage 2: run binary
 FROM alpine:3.11
 
-COPY --from=builder /build/server /usr/local/bin/server
+COPY --from=builder /build/main /usr/local/bin/server
 WORKDIR /usr/local/bin
 
 CMD ["/usr/local/bin/server"]
