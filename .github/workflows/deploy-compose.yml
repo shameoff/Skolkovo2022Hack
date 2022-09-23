@@ -23,4 +23,3 @@ jobs:
             git fetch --all
             git reset --hard origin/main
             docker-compose up --build -d
-            echo "SUCCESS"
