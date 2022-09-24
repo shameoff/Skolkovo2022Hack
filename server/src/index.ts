@@ -1,7 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
+const fs = require("fs");
 
-import log4js from 'log4js'
 
 // controllers
 import Editor from './editor/Editor'
@@ -14,8 +14,6 @@ const changeSizeContr = new ChangeSizeContr(editor);
 
 // dotenv
 dotenv.config()
-const logger = log4js.getLogger()
-logger.level = process.env.LOG_LEVEL || ''
 
 const app = express()
 const port = process.env.EXPRESS_PORT
@@ -24,7 +22,9 @@ const port = process.env.EXPRESS_PORT
 app.use(express.json())
 
 app.get('/', (request, response) => {
-    changeFExtentionContr.execute("mp3");
+    
+    return response.download('./index.html')
+
 })
 
 
