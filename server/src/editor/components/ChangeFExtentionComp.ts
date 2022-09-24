@@ -16,10 +16,10 @@ export default class ChangeFExtentionContr {
     execute(newExt: string) {
         ( async () => {
             await this.ffmpeg.load();
-            this.ffmpeg.FS('writeFile', 'test.avi', await this.fetchFile('./test.avi'));
-            await this.ffmpeg.run('-i', 'test.avi', 'test.mp4');
-            await this.fs.promises.writeFile('./test.mp4', this.ffmpeg.FS('readFile', 'test.mp4'));
+            this.ffmpeg.FS('writeFile', 'video_test.mp4', await this.fetchFile('./src/input_files/video_test.mp4'));
+            await this.ffmpeg.run('-i', 'video_test.mp4', 'test.avi');
+            await this.fs.promises.writeFile('./src/output_files/test.avi', this.ffmpeg.FS('readFile', 'test.avi'));
             process.exit(0);
-        })
+        })();
     }
 }
