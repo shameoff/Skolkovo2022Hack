@@ -7,7 +7,7 @@ const logger = log4js.getLogger()
 logger.level = process.env.LOG_LEVEL || ''
 
 const app = express()
-const port = process.env.PORT
+const port = process.env.EXPRESS_PORT
 
 app.use(express.json())
 
