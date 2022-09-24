@@ -1,15 +1,15 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface VideoState {
-    videoFile: File
+    videoFile: ArrayBuffer
 }
 
 export const VideoSlice = createSlice({
     name: "video",
     initialState: {} as VideoState,
     reducers: {
-        setVideo: (state, action: PayloadAction<File>) => {
+        setVideo: (state, action: PayloadAction<ArrayBuffer>) => {
             console.log(action.payload);
             state.videoFile = action.payload
         }

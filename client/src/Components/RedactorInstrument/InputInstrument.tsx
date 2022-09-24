@@ -17,11 +17,21 @@ const InputInstrument: FC<InstrumentProps> = () => {
             formData.append('file', file);
             console.log(file);
 
-            dispatch(setVideo(file));
+            let reader = new FileReader();
+            reader.readAsArrayBuffer(file);
 
-            // axios.post(`http:/server/addVideo`, formData).then((res) => {
-            //     console.log(res);
-            // })
+            reader.onload = function() {
+                console.log(reader.result);
+                dispatch(setVideo(reader.result as ArrayBuffer));
+            }
+
+            reader.onerror = function() {
+                console.log(reader.error);
+            }
+
+            axios.post(`http://localhost:3000/video`, reader.result).then((res) => {
+                console.log(res);
+            })
         } catch(err) {
             console.log(err);
         }
