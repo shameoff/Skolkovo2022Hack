@@ -23,4 +23,4 @@ app.post('/api/video', function (request, response) {
     return response.sendStatus(200);
 });
 app.listen(port, function () { return console.log("Running on port ".concat(port)); });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=index.ts.map
