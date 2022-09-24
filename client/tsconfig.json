@@ -5,7 +5,7 @@
     "paths": {
       "types/*": ["src/types/*"],
       "@Components/*": ["src/Components/*"],
-      "@images/*": ["src/Resources/images/*"],
+      "@images/*": ["src/assets/images/*"],
       "@redux/*": ["src/redux/*"],
       "@src/*": ["src/*"],
       "@API/*": ["src/API/*"]
