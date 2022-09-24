@@ -20,6 +20,5 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /home/${{ secrets.SSH_USER }}/services/onemorehack
-            git fetch --all
-            git reset --hard origin/main
-            docker-compose up --build -d
+            echo "One more commit"
+            # Write here your job when deploy on main
