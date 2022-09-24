@@ -27,9 +27,12 @@ const InputInstrument: FC<InstrumentProps> = () => {
             }
 
             reader.onload = function() {
+                console.log(formData.get('file'));
                 console.log(reader.result);
                 dispatch(setVideo(reader.result as ArrayBuffer));
-                axios.post(`http://localhost:3000/video`, formData, config).then((res) => {
+                axios.post(`http://localhost:3001/video`, formData, {
+                    headers: {'Content-Type': 'multipart/form-data' }
+                }).then((res) => {
                     console.log(res);
                 })
             }
