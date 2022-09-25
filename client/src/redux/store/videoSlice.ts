@@ -10,7 +10,6 @@ export const VideoSlice = createSlice({
     initialState: {} as VideoState,
     reducers: {
         setVideo: (state, action: PayloadAction<string>) => {
-            console.log(action.payload);
             state.videoFile = action.payload
         }
     }
