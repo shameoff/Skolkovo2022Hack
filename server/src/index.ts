@@ -12,6 +12,7 @@ import ExitContr from "./controllers/ExitContr";
 import JoinFileContr from "./controllers/JoinFileContr";
 import ReformatContr from "./controllers/ReformatContr";
 import Editor from "./editor/Editor";
+import bodyParser from 'body-parser';
 
 const upload = multer();
 const editor = new Editor()
@@ -34,6 +35,7 @@ const port = process.env.EXPRESS_PORT;
 
 app.options("*", cors());
 app.use(cors());
+app.use(bodyParser.json({ limit: '100mb' }))
 
 app.get("/", (request, response) => {
     //
