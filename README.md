@@ -1,26 +1,31 @@
 # Skolkovo Hack 2022
 
-Проект содержит разделение на back-end и front-end, где исходный код распределен в server и client.
-Чтобы запустить на своей машине, делаем следующее: 
-  $ nano /etc/nginx/conf.d/default.conf
-  Вставляем следующее 
-  " server {
-      listen 80;
-      server_name <домен, на котором нужно расположить>;
-      location / {
-        root <путь до папки client/dist>;
-        index index.html;
-      }
-      location /* {
-        proxy_pass localhost:<порт, который укажете в .env EXPRESS_PORT>;
-      } 
-  "
-Теперь главная страница ссылается на index.html, а всё остальное на сервер бэкенда. 
-При первом запуске сервера прописывааем, чтобы подтянуть все пакеты NodeJS: 
-  `cd onemorehack/server && npm install`
-  `cd onemorehack/client && npm install`
+  Проект содержит разделение на back-end и front-end, где исходный код распределен в server и client.
+
+Чтобы запустить на своей машине, делаем следующее:
+
+  `$ nano /etc/nginx/conf.d/default.conf`
+  
+Вставляем следующее 
+"  server { <br/>
+      listen 80; <br/>
+      server_name <домен, на котором нужно расположить>; <br/>
+        root <путь до папки client/dist>; <br/>
+        index index.html; <br/>
+      } <br/>
+      location /* { <br/>
+        proxy_pass localhost:<порт, который укажете в .env EXPRESS_PORT>; <br/>
+      } <br/>
+" 
+
+  Теперь главная страница ссылается на index.html, а всё остальное на сервер бэкенда. 
+
+При первом запуске сервера прописывааем, чтобы подтянуть все пакеты NodeJS: <br/> 
+  1 `cd onemorehack/server && npm install` <br/>
+  2 `cd onemorehack/client && npm install` 
+
 Затем билдим фронт и запускаем бэк след командами(важно сначала сбилдить фронт):
-  1 `cd onemorehack/server && npm start`
+  1 `cd onemorehack/server && npm start` <br/>
   2 `cd onemorehack/server && npm run build`
 
   После этого перейти по <домен, на котором нужно расположить>, потыкать кнопочки и если мы всё сделали правильно, то оно заработает. Если нет, ну, грустно, чо поделать, значит неправильно
