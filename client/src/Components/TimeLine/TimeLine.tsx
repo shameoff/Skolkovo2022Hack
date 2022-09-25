@@ -7,9 +7,20 @@ import styles from "./TimeLine.module.scss";
 interface TimeLineProps {}
 
 const TimeLine: FC<TimeLineProps> = () => {
-  const timeLineState: TimeLineState = useAppSelector(
-    (state: RootState) => state,
+  const state: TimeLineState = useAppSelector(
+    (state: RootState) => state.timeLine,
   );
+
+  const [frames, setFrames] = React.useState<number[]>();
+
+  React.useEffect(() => {
+    let tempFrames = [];
+    for (let i = 1; i < state.duration + 1; ++i) {
+      tempFrames.push(i);
+    }
+
+    setFrames(tempFrames)
+  }, [state])
 
   // React.useEffect(() => {
   //   axios.get(`${constant.host}/frames`).then((resp: any) => {
@@ -25,8 +36,12 @@ const TimeLine: FC<TimeLineProps> = () => {
     {/* {state!.map((buff: ArrayBuffer) => {
       return <img src={'data:image/jpeg;base64, '+ buff.toString('base64')}
     })} */}
-
-    {timeLineState.duration}
+    {console.log(frames)}
+    <div  style={{display: "flex", alignItems: "center", height: "80%", width: "100%"}}>
+      {frames?.map((el) => <div className={styles.Frame} style={{width: 100 / frames.length + "%", height: "100%", background: "#000", border: "1px solid #fff", cursor: "pointer"}}>
+        <p style={{color: "#fff"}}>{el}</p>
+    </div>)}
+    </div>
   </div>
   )
 };

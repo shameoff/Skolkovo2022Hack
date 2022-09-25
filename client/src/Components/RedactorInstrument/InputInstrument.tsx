@@ -55,7 +55,7 @@ const InputInstrument: FC<InstrumentProps> = () => {
         <input
         type="file"
         className={styles.Input}
-        onChange={(e) => onSelectHandler(e.target.files!)}
+        onChange={(e) => { onSelectHandler(e.target.files!); e.target.value = ""; }}
         />
     </div>
     )

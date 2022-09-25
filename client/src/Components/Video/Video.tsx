@@ -27,11 +27,12 @@ const Video: FC<VideoProps> = () => {
 
   const handleMetaData = () => {
     dispatch(setDuration(video.duration));
+    console.log(video.duration)
   }
 
   return (
-  <video controls className={styles.Video} data-testid="Video" ref={videoRef} onLoadedMetadata={handleMetaData}>
-    <source id="video-sourse" src={videoState.videoFile} />
+  <video src={videoState.videoFile} controls className={styles.Video} data-testid="Video" ref={videoRef} onLoadedMetadata={handleMetaData}>
+    {/* <source id="video-sourse" src={videoState.videoFile} /> */}
   </video>
   )
 }

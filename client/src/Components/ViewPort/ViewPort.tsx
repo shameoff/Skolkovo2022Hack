@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import Video from "@Components/Video/Video";
 import styles from "./ViewPort.module.scss";
+import TimeLine from "@Components/TimeLine/TimeLine";
 
 interface ViewPortProps {}
 
