@@ -9,6 +9,7 @@ import ExitComp from "./components/ExitComp";
 import ApplyLogoComp from './components/ApplyLogoComp';
 import CutFileComp from './components/CutFileComp';
 import JoinFileComp from './components/JoinFileComp';
+import GetFrames from './components/GetFramesComp';
 
 export default class EditorFactory {
 
@@ -30,6 +31,10 @@ export default class EditorFactory {
 
     createCutFileComp(): CutFileComp {
         return new CutFileComp(ffmpeg, fetchFile, fs);
+    }
+
+    createGetFramesComp(): GetFrames {
+        return new GetFrames(ffmpeg, fetchFile, fs);
     }
 
     createExitComp(): ExitComp {

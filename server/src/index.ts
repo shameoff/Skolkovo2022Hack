@@ -38,7 +38,7 @@ app.options("*", cors());
 app.use(cors());
 
 app.get("/", (request, response) => {
-    return response.sendFile(path.join(__dirname, "./../index.html"));
+    //
 });
 
 app.post("/video", upload.any(), (request, response) => {
@@ -123,4 +123,4 @@ try {
 }
 
 
-app.listen(port, () => console.log(`Running on port ${port}`));
+app.listen(3000, () => console.log(`Running on port ${port}`));

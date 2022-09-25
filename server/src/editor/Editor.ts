@@ -25,6 +25,10 @@ export default class Editor {
         editorFactory.createCutFileComp().execute(oldFileName, newFileName, timelines, root);
     }
 
+    getFrames(inputFileName: string) {
+        editorFactory.createGetFramesComp().execute(inputFileName);
+    }
+
     exit() {
         editorFactory.createExitComp().execute;
     }
