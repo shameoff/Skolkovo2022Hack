@@ -18,7 +18,7 @@ const InputInstrument: FC<InstrumentProps> = () => {
             console.log(file);
 
             let reader = new FileReader();
-            reader.readAsArrayBuffer(file);
+            reader.readAsDataURL(file);
 
             let config = {
                 header: {
@@ -26,10 +26,10 @@ const InputInstrument: FC<InstrumentProps> = () => {
                 }
             }
 
-            reader.onload = function() {
+            reader.onload = function(e) {
                 console.log(formData.get('file'));
-                console.log(reader.result);
-                dispatch(setVideo(reader.result as ArrayBuffer));
+                console.log(e.target!.result);
+                dispatch(setVideo(e.target!.result!.toString() as string))
                 axios.post(`http://localhost:3001/video`, formData, {
                     headers: {'Content-Type': 'multipart/form-data' }
                 }).then((res) => {
