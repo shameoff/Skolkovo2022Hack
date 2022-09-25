@@ -12,7 +12,7 @@ const busboy = require("connect-busboy");
 const path = require("path");
 
 // dotenv
-dotenv.config({ path: "../.env" });
+dotenv.config({ path: path.resolve(__dirname, "..", ".env") });
 
 const app = express();
 const port = process.env.EXPRESS_PORT;
@@ -33,4 +33,4 @@ app.post("/video", upload.any(), (request, response) => {
   return response.sendStatus(200);
 });
 
-app.listen(port, () => console.log(`Running on port ${port}`));
+app.listen(3000, () => console.log(`Running on port ${port}`));

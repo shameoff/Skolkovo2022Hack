@@ -12,11 +12,12 @@ const Video: FC<VideoProps> = () => {
   );
   const videoRef = React.useRef();
   const video: HTMLVideoElement = videoRef.current!;
+  const [state, setState] = React.useState();
 
   React.useEffect(() => {
     try {
       video.load();
-      console.log("loaded");
+      console.log(video);
     }
     catch(err) {
       console.log(err);
@@ -24,7 +25,7 @@ const Video: FC<VideoProps> = () => {
   }, [video])
 
   return (
-  <video controls className={styles.Video} data-testid="Video" ref={videoRef}>
+  <video controls className={styles.Video} data-testid="Video" ref={videoRef} onLoadedMetadata={state}>
     <source id="video-sourse" src={videoState.videoFile} />
   </video>
   )

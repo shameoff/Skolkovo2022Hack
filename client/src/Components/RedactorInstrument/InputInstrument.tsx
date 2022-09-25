@@ -3,6 +3,7 @@ import styles from "./Instrument.module.scss";
 import axios from "axios";
 import { useAppDispatch } from "@redux/hooks";
 import { setVideo } from "@redux/store/videoSlice";
+import constant from "@src/constants/constant";
 
 interface InstrumentProps {
   src: any;
@@ -30,7 +31,7 @@ const InputInstrument: FC<InstrumentProps> = () => {
                 console.log(formData.get('file'));
                 console.log(e.target!.result);
                 dispatch(setVideo(e.target!.result!.toString() as string))
-                axios.post(`http://localhost:3001/video`, formData, {
+                axios.post(`${constant.host}/video`, formData, {
                     headers: {'Content-Type': 'multipart/form-data' }
                 }).then((res) => {
                     console.log(res);

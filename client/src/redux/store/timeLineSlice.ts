@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { BaseType } from "typescript";
 
 export interface TimeLineState {
     isCutting: boolean,
-    timeLineFrames: Array<BaseType>
+    timeLineFrames: ArrayBuffer[]
 }
 
 export const VideoSlice = createSlice({
@@ -16,11 +15,11 @@ export const VideoSlice = createSlice({
             state.isCutting = action.payload
         },
 
-        setFrames: (state, action: PayloadAction<Array<BaseType>>) => {
+        setFrames: (state, action: PayloadAction<ArrayBuffer[]>) => {
             state.timeLineFrames = action.payload;
         }
     }
 })
 
-export const {setVideo} = VideoSlice.actions;
+export const {setIsCutting, setFrames} = VideoSlice.actions;
 export default VideoSlice.reducer;
