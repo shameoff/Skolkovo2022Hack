@@ -15,7 +15,9 @@ export default class JoinFileComp {
 
     execute(firstFileName: string, secondFileName: string, outputFileName: string) {
         ( async () => {
-            await this.ffmpeg.load();
+            if (!this.ffmpeg.isLoaded()) {
+                await this.ffmpeg.load();
+            }
             this.ffmpeg.FS('writeFile', firstFileName, await this.fetchFile('./src/input_files/' + firstFileName));
             this.ffmpeg.FS('writeFile', secondFileName, await this.fetchFile('./src/input_files/' + secondFileName));
             let buff1 = "buff1.";
@@ -28,7 +30,6 @@ export default class JoinFileComp {
             await this.ffmpeg.run('-i', "buff.mp4", outputFileName);
             await this.fs.promises.writeFile('./src/output_files/' + outputFileName, this.ffmpeg.FS('readFile', "buff.mp4"));
             console.log("Component joined videos.");
-            process.exit(0);
         })();
     }
 }

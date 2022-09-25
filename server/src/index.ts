@@ -25,6 +25,7 @@ const cutFileContr = new CutFileContr(editor);
 const joinFileContr = new JoinFileContr(editor);
 
 let outputFileName = "";
+let fileName = "";
 let defaultFileExtension = "";
 let inputFileName: string = "";
 let inputPhotoName = "";
@@ -45,77 +46,74 @@ app.post("/video", upload.any(), (request, response) => {
     console.log(request.files);
     const files = request.files;
     for (let i = 0; i < files.length; i += 1) {
-        let fileName = files[i].originalname;
-        let index = fileName.lastIndexOf('.');
-        let fileExtencion: string = fileName.substr(index, fileName.length);
-        defaultFileExtension = fileExtencion
-        console.log(fileExtencion);
+        fileName = files[i].originalname;
+
+
         let dir = path.join(__dirname, "input_files/")
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, {recursive: true})
         }
+
         dir = path.join(__dirname, "output_files/")
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, {recursive: true})
         }
-        outputFileName = "output_files/output_video";
-        inputFileName = "input_files/input_video" + fileExtencion;
-        fs.writeFileSync(path.join(__dirname, inputFileName), files[i].buffer);
-    }
-    return response.sendStatus(200);
-});
 
-app.post("/photo", upload.any(), (request, response) => {
-    console.log(request.body);
-    console.log(request.files);
-    const files = request.files;
-    for (let i = 0; i < files.length; i += 1) {
-        let fileName = files[i].originalname;
-        let index = fileName.lastIndexOf('.');
-        let fileExtencion = fileName.substr(index, fileName.length);
-        console.log(fileExtencion);
-        let dir = path.join(__dirname, "input_files/")
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, {recursive: true})
-        }
-        inputFileName = "./input_files/input_photo" + fileExtencion
+        outputFileName = "output_files/" + fileName;
+        inputFileName = "input_files/" + fileName;
 
         fs.writeFileSync(path.join(__dirname, inputFileName), files[i].buffer);
     }
     return response.sendStatus(200);
 });
+
+// app.post("/photo", upload.any(), (request, response) => {
+//     console.log(request.body);
+//     console.log(request.files);
+//     const files = request.files;
+//     for (let i = 0; i < files.length; i += 1) {
+//         let fileName = files[i].originalname;
+//
+//         let index = fileName.lastIndexOf('.');
+//         let fileExtencion = fileName.substr(index, fileName.length);
+//
+//         let dir = path.join(__dirname, "input_files/")
+//         if (!fs.existsSync(dir)) {
+//             fs.mkdirSync(dir, {recursive: true})
+//         }
+//
+//         inputFileName = "./input_files/" + fileName
+//         console.log(inputFileName);
+//         fs.writeFileSync(path.join(__dirname, inputFileName), files[i].buffer);
+//     }
+//     return response.sendStatus(200);
+// });
 
 try {
-    let dir = path.join(__dirname, "input_files/")
-    if (fs.existsSync(dir)) {
-        inputFileName = "/input_files/input_video.mp4"
-        outputFileName = "/output_files/output_video.mp4"
-        defaultFileExtension = ""
-    }
-
-
     app.get('/change', (request, response) => {
         //defaultFileExtension = request.body
         console.log(request.body);
-        changeFExtentionContr.execute(inputFileName, outputFileName, __dirname);
+        const lastDotIndex = inputFileName.lastIndexOf('.')
+        let temp = outputFileName.substring(0, lastDotIndex + 1) + ".mpeg"
+
+        changeFExtentionContr.execute(inputFileName, temp, __dirname);
         response.send(defaultFileExtension)
     })
+
     // app.get('/applyLogo', (request, response) => {
     //     applyLogoContr.execute();
     // })
+
     app.get('/reformat', (request, response) => {
         reformatContr.execute(inputFileName, outputFileName, "100:200", __dirname);
         response.send(defaultFileExtension)
     })
+
     app.get('/cutfile', (request, response) => {
-        cutFileContr.execute(inputFileName, outputFileName,
-            [new Timeline(1, 2)]
-            , __dirname);
+        cutFileContr.execute(inputFileName, outputFileName, [new Timeline(0, 1)], __dirname);
         response.send(defaultFileExtension)
     })
-    // app.get('/joinFile', (request, response) => {
-    //     joinFileContr.execute();
-    // })
+
     app.get('/exit', (request, response) => {
         exitContr.execute();
         response.send(defaultFileExtension)

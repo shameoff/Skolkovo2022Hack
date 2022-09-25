@@ -18,7 +18,6 @@ export default class ChangeSizeComp {
         ( async () => {
             this.ffmpeg.exit();
             console.log("Component exited from ffmpeg.");
-            process.exit(0);
         })();
     }
 }

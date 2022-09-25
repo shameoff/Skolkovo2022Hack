@@ -16,7 +16,9 @@ export default class ApplyLogo {
 
     execute(oldFileName: string, newFileName: string, logoFileName: string, coordinates: string, root: string) {
         ( async () => {
-            await this.ffmpeg.load();
+            if (!this.ffmpeg.isLoaded()) {
+                await this.ffmpeg.load();
+            }
             this.ffmpeg.FS('writeFile', path.basename(oldFileName), await this.fetchFile(path.join(root, oldFileName)));
             this.ffmpeg.FS('writeFile', path.basename(logoFileName), await this.fetchFile(path.join(root, logoFileName)));
             let buff = '[0:v][1:v]overlay=' + coordinates
@@ -24,7 +26,6 @@ export default class ApplyLogo {
             await this.ffmpeg.run('-i', path.basename(oldFileName), '-i', path.basename(logoFileName), '-filter_complex', buff, path.basename(newFileName));
             await this.fs.promises.writeFile(path.join(root, newFileName), this.ffmpeg.FS('readFile', path.basename(newFileName)));
             console.log("Component applied logo.");
-            process.exit(0);
         })();
     }
 }

@@ -17,7 +17,9 @@ export default class CutFileComp {
 
     execute(oldFileName: string, newFileName: string, timelines: Timeline[], root: string) {
         ( async () => {
-            await this.ffmpeg.load();
+            if (!this.ffmpeg.isLoaded()) {
+                await this.ffmpeg.load();
+            }
             this.ffmpeg.FS('writeFile', path.basename(oldFileName), await this.fetchFile(path.join(root, oldFileName)));
             let concat: string = "concat:";
             for(let i = 0; i < timelines.length; i++) {
@@ -32,7 +34,6 @@ export default class CutFileComp {
             await this.ffmpeg.run('-i', "buff.mp4", path.basename(newFileName));
             await this.fs.promises.writeFile(path.join(root, newFileName), this.ffmpeg.FS('readFile', "buff.mp4"));
             console.log("Component cut file.");
-            process.exit(0);
         })();
     }
 }
