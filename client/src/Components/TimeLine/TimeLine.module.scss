@@ -6,3 +6,8 @@
     width: 100%;
     align-items: center;
 }
+
+.Frame:hover {
+    background-color: red !important;
+    transition: 0.3s;
+}

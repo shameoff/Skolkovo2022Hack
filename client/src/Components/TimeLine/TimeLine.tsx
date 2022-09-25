@@ -1,12 +1,14 @@
-import { useAppSelector } from "@redux/hooks";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { RootState } from "@redux/store/store";
-import { TimeLineState } from "@redux/store/timeLineSlice";
+import { setleftFrameNum, setrightFrameNum, TimeLineState } from "@redux/store/timeLineSlice";
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import styles from "./TimeLine.module.scss";
 
 interface TimeLineProps {}
 
 const TimeLine: FC<TimeLineProps> = () => {
+  const dispatch = useAppDispatch();
   const state: TimeLineState = useAppSelector(
     (state: RootState) => state.timeLine,
   );
@@ -22,6 +24,18 @@ const TimeLine: FC<TimeLineProps> = () => {
     setFrames(tempFrames)
   }, [state])
 
+  const handleFrameClick = (e: MouseEvent) => {
+    /* @ts-ignore */
+    const num = e.target.innerText;
+    if (state.isLeftCutting) {
+      dispatch(setleftFrameNum(num))
+    }
+
+    if (state.isRightCutting) {
+      dispatch(setrightFrameNum(num));
+    }
+  }
+
   // React.useEffect(() => {
   //   axios.get(`${constant.host}/frames`).then((resp: any) => {
   //     setState(resp);
@@ -36,9 +50,8 @@ const TimeLine: FC<TimeLineProps> = () => {
     {/* {state!.map((buff: ArrayBuffer) => {
       return <img src={'data:image/jpeg;base64, '+ buff.toString('base64')}
     })} */}
-    {console.log(frames)}
-    <div  style={{display: "flex", alignItems: "center", height: "80%", width: "100%"}}>
-      {frames?.map((el) => <div className={styles.Frame} style={{width: 100 / frames.length + "%", height: "100%", background: "#000", border: "1px solid #fff", cursor: "pointer"}}>
+    <div style={{display: "flex", alignItems: "center", height: "80%", width: "100%"}}>
+      {frames?.map((el) => <div className={styles.Frame} onClick={handleFrameClick} style={{width: 100 / frames.length + "%", height: "100%", background: "#000", border: "1px solid #fff", cursor: "pointer"}}>
         <p style={{color: "#fff"}}>{el}</p>
     </div>)}
     </div>

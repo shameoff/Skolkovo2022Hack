@@ -10,7 +10,7 @@ const Instrument: FC<InstrumentProps> = ({ src }) => (
     className={styles.Instrument}
     data-testid="Instrument">
     <img
-      alt="Добавить"
+      alt="вырезать"
       className={styles.Image}
       src={src}
     />
