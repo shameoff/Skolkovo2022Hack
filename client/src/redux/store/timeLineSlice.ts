@@ -17,13 +17,11 @@ export const timeLineSlice = createSlice({
     initialState: {} as TimeLineState,
     reducers: {
         setIsLeftCutting: (state, action: PayloadAction<boolean>) => {
-            console.log(action.payload);
             state.isLeftCutting = action.payload
             state.isRightCutting = false
         },
 
         setIsRightCutting: (state, action: PayloadAction<boolean>) => {
-            console.log(action.payload);
             state.isRightCutting = action.payload
             state.isLeftCutting = false
         },
