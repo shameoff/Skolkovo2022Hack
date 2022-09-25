@@ -35,7 +35,8 @@ const port = process.env.EXPRESS_PORT;
 
 app.options("*", cors());
 app.use(cors());
-app.use(bodyParser.json({ limit: '100mb' }))
+app.use(bodyParser.json({ limit: '1000mb' }))
+app.use(bodyParser.urlencoded({limit: '1000mb', extended: true}));
 
 app.get("/", (request, response) => {
     //
