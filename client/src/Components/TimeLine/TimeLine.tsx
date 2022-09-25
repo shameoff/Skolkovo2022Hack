@@ -1,12 +1,15 @@
-import constant from "@src/constants/constant";
-import axios from "axios";
+import { useAppSelector } from "@redux/hooks";
+import { RootState } from "@redux/store/store";
+import { TimeLineState } from "@redux/store/timeLineSlice";
 import React, { FC } from "react";
 import styles from "./TimeLine.module.scss";
 
 interface TimeLineProps {}
 
 const TimeLine: FC<TimeLineProps> = () => {
-  const [state, setState] = React.useState<any>();
+  const timeLineState: TimeLineState = useAppSelector(
+    (state: RootState) => state,
+  );
 
   // React.useEffect(() => {
   //   axios.get(`${constant.host}/frames`).then((resp: any) => {
@@ -23,6 +26,7 @@ const TimeLine: FC<TimeLineProps> = () => {
       return <img src={'data:image/jpeg;base64, '+ buff.toString('base64')}
     })} */}
 
+    {timeLineState.duration}
   </div>
   )
 };

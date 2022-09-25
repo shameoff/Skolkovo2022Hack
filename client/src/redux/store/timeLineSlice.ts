@@ -6,7 +6,7 @@ export interface TimeLineState {
     duration: number
 }
 
-export const VideoSlice = createSlice({
+export const timeLineSlice = createSlice({
     name: "video",
     initialState: {} as TimeLineState,
     reducers: {
@@ -15,11 +15,11 @@ export const VideoSlice = createSlice({
             state.isCutting = action.payload
         },
 
-        setFrames: (state, action: PayloadAction<number>) => {
+        setDuration: (state, action: PayloadAction<number>) => {
             state.duration = action.payload;
         }
     }
 })
 
-export const {setIsCutting, setFrames} = VideoSlice.actions;
-export default VideoSlice.reducer;
+export const {setIsCutting, setDuration} = timeLineSlice.actions;
+export default timeLineSlice.reducer;

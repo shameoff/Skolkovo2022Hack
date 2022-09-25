@@ -3,6 +3,7 @@ import { VideoState } from "@redux/store/videoSlice";
 import { RootState } from '@redux/store/store';
 import React, { FC } from 'react';
 import styles from './Video.module.scss';
+import { setDuration } from '@redux/store/timeLineSlice';
 
 interface VideoProps {}
 
@@ -25,7 +26,7 @@ const Video: FC<VideoProps> = () => {
   }, [video])
 
   const handleMetaData = () => {
-    setState(video.duration);
+    dispatch(setDuration(video.duration));
   }
 
   return (
