@@ -7,7 +7,7 @@ export interface TimeLineState {
 }
 
 export const timeLineSlice = createSlice({
-    name: "video",
+    name: "timeline",
     initialState: {} as TimeLineState,
     reducers: {
         setIsCutting: (state, action: PayloadAction<boolean>) => {
