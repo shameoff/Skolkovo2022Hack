@@ -27,7 +27,6 @@ const Video: FC<VideoProps> = () => {
 
   const handleMetaData = () => {
     dispatch(setDuration(video.duration));
-    console.log(video.duration)
   }
 
   return (

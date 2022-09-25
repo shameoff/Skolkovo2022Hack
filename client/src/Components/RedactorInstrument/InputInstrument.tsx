@@ -16,20 +16,11 @@ const InputInstrument: FC<InstrumentProps> = () => {
             const file = files[0];
             const formData = new FormData();
             formData.append('file', file);
-            console.log(file);
 
             let reader = new FileReader();
             reader.readAsDataURL(file);
 
-            // let config = {
-            //     header: {
-            //         'Content-Type': 'multipart/form-data'
-            //     }
-            // }
-
             reader.onload = function(e) {
-                console.log(formData.get('file'));
-                console.log(e.target!.result);
                 dispatch(setVideo(e.target!.result!.toString() as string))
                 axios.post(`${constant.host}/video`, formData, {
                     headers: {'Content-Type': 'multipart/form-data' }
