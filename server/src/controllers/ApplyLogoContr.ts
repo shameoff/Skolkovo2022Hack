@@ -8,7 +8,7 @@ export default class ApplyLogoContr {
         this.editor = editor;
     }
 
-    execute(inputFile: string, outputFile: string, logoFile: string, coordinates: string) {
-        this.editor.applyLogo(inputFile, outputFile, logoFile, coordinates);
+    execute(inputFile: string, outputFile: string, logoFile: string, coordinates: string, root: string) {
+        this.editor.applyLogo(inputFile, outputFile, logoFile, coordinates, root);
     } 
 }

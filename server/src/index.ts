@@ -6,12 +6,13 @@ import fs from "fs";
 import multer from "multer";
 import path from "path";
 import ApplyLogoContr from "./controllers/ApplyLogoContr";
-import ChangeFExtentionContr from "./controllers/ExitContr";
+import ChangeFExtentionContr from "./controllers/ChangeFExtentionContr";
 import CutFileContr from "./controllers/CutFileContr";
 import ExitContr from "./controllers/ExitContr";
 import JoinFileContr from "./controllers/JoinFileContr";
 import ReformatContr from "./controllers/ReformatContr";
 import Editor from "./editor/Editor";
+import Timeline from "./model/Timeline";
 
 const upload = multer();
 const editor = new Editor()
@@ -85,27 +86,39 @@ app.post("/photo", upload.any(), (request, response) => {
 });
 
 try {
+    let dir = path.join(__dirname, "input_files/")
+    if (fs.existsSync(dir)) {
+        inputFileName = "/input_files/input_video.mp4"
+        outputFileName = "/output_files/output_video.mp4"
+        defaultFileExtension = ""
+    }
+
 
     app.get('/change', (request, response) => {
-        defaultFileExtension = request.body
+        //defaultFileExtension = request.body
         console.log(request.body);
-        changeFExtentionContr.execute(inputFileName, outputFileName + defaultFileExtension);
-        response.send(defaultFileExtension.toString())
+        changeFExtentionContr.execute(inputFileName, outputFileName, __dirname);
+        response.send(defaultFileExtension)
     })
     // app.get('/applyLogo', (request, response) => {
     //     applyLogoContr.execute();
     // })
     app.get('/reformat', (request, response) => {
-        reformatContr.execute(inputFileName, outputFileName + defaultFileExtension, request.body);
+        reformatContr.execute(inputFileName, outputFileName, "100:200", __dirname);
+        response.send(defaultFileExtension)
     })
-    app.get('/cutFile', (request, response) => {
-        cutFileContr.execute(inputFileName, outputFileName + defaultFileExtension, request.body);
+    app.get('/cutfile', (request, response) => {
+        cutFileContr.execute(inputFileName, outputFileName,
+            [new Timeline(1, 2)]
+            , __dirname);
+        response.send(defaultFileExtension)
     })
     // app.get('/joinFile', (request, response) => {
     //     joinFileContr.execute();
     // })
     app.get('/exit', (request, response) => {
         exitContr.execute();
+        response.send(defaultFileExtension)
     })
 } catch (error) {
     throw error

@@ -8,7 +8,7 @@ export default class ChangeFExtentionContr {
         this.editor = editor;
     }
 
-    execute(inputFile: string, outputFile: string) {
-        this.editor.changeFExtention(inputFile, outputFile);
+    execute(inputFile: string, outputFile: string, root: string) {
+        this.editor.changeFExtention(inputFile, outputFile, root);
     } 
 }

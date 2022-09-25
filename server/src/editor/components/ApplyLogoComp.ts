@@ -1,5 +1,6 @@
 
 import { FFmpeg } from "@ffmpeg/ffmpeg";
+import path from "path";
 
 export default class ApplyLogo {
 
@@ -13,15 +14,15 @@ export default class ApplyLogo {
         this.fs = fs;
     }
 
-    execute(oldFileName: string, newFileName: string, logoFileName: string, coordinates: string ) {
+    execute(oldFileName: string, newFileName: string, logoFileName: string, coordinates: string, root: string) {
         ( async () => {
             await this.ffmpeg.load();
-            this.ffmpeg.FS('writeFile', oldFileName, await this.fetchFile('./src/input_files/' + oldFileName));
-            this.ffmpeg.FS('writeFile', logoFileName, await this.fetchFile('./src/input_files/' + logoFileName));
+            this.ffmpeg.FS('writeFile', path.basename(oldFileName), await this.fetchFile(path.join(root, oldFileName)));
+            this.ffmpeg.FS('writeFile', path.basename(logoFileName), await this.fetchFile(path.join(root, logoFileName)));
             let buff = '[0:v][1:v]overlay=' + coordinates
             console.log(buff);
-            await this.ffmpeg.run('-i', oldFileName, '-i', logoFileName, '-filter_complex', buff, newFileName);
-            await this.fs.promises.writeFile('./src/output_files/' + newFileName, this.ffmpeg.FS('readFile', newFileName));
+            await this.ffmpeg.run('-i', path.basename(oldFileName), '-i', path.basename(logoFileName), '-filter_complex', buff, path.basename(newFileName));
+            await this.fs.promises.writeFile(path.join(root, newFileName), this.ffmpeg.FS('readFile', path.basename(newFileName)));
             console.log("Component applied logo.");
             process.exit(0);
         })();

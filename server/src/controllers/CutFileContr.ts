@@ -9,7 +9,7 @@ export default class CutFileContr {
         this.editor = editor;
     }
 
-    execute(inputFile: string, outputFile: string, timelines: Timeline[] ) {
-        this.editor.cutFile(inputFile, outputFile, timelines)
+    execute(inputFile: string, outputFile: string, timelines: Timeline[], root: string) {
+        this.editor.cutFile(inputFile, outputFile, timelines, root )
     } 
 }
