@@ -49,8 +49,14 @@ app.post("/video", upload.any(), (request, response) => {
         let fileExtencion: string = fileName.substr(index, fileName.length);
         defaultFileExtension = fileExtencion
         console.log(fileExtencion);
-        fs.mkdirSync(path.join(__dirname, "input_files/"))
-        fs.mkdirSync(path.join(__dirname, "output_files/"))
+        let dir = path.join(__dirname, "input_files/")
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, {recursive: true})
+        }
+        dir = path.join(__dirname, "output_files/")
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, {recursive: true})
+        }
         outputFileName = "output_files/output_video";
         inputFileName = "input_files/input_video" + fileExtencion;
         fs.writeFileSync(path.join(__dirname, inputFileName), files[i].buffer);
@@ -67,8 +73,13 @@ app.post("/photo", upload.any(), (request, response) => {
         let index = fileName.lastIndexOf('.');
         let fileExtencion = fileName.substr(index, fileName.length);
         console.log(fileExtencion);
+        let dir = path.join(__dirname, "input_files/")
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, {recursive: true})
+        }
         inputFileName = "./input_files/input_photo" + fileExtencion
-        fs.writeFileSync(inputFileName, files[i].buffer);
+
+        fs.writeFileSync(path.join(__dirname, inputFileName), files[i].buffer);
     }
     return response.sendStatus(200);
 });
