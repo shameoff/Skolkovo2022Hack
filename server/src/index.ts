@@ -49,8 +49,10 @@ app.post("/video", upload.any(), (request, response) => {
         let fileExtencion: string = fileName.substr(index, fileName.length);
         defaultFileExtension = fileExtencion
         console.log(fileExtencion);
-        outputFileName = "..src/output_files/output_video";
-        inputFileName = "../src/input_files/input_video" + fileExtencion;
+        fs.mkdirSync(path.join(__dirname, "input_files/"))
+        fs.mkdirSync(path.join(__dirname, "output_files/"))
+        outputFileName = "output_files/output_video";
+        inputFileName = "input_files/input_video" + fileExtencion;
         fs.writeFileSync(path.join(__dirname, inputFileName), files[i].buffer);
     }
     return response.sendStatus(200);
@@ -75,7 +77,9 @@ try {
 
     app.get('/change', (request, response) => {
         defaultFileExtension = request.body
+        console.log(request.body);
         changeFExtentionContr.execute(inputFileName, outputFileName + defaultFileExtension);
+        response.send(defaultFileExtension.toString())
     })
     // app.get('/applyLogo', (request, response) => {
     //     applyLogoContr.execute();
