@@ -1,7 +1,7 @@
 
 import Editor from '../editor/Editor'
 
-export default class ChangeFExtentionContr {
+export default class JoinFileContr {
     private editor: Editor
 
     constructor(editor: Editor) {
@@ -9,6 +9,6 @@ export default class ChangeFExtentionContr {
     }
 
     execute() {
-        this.editor.changeFExtention("test.mp4", "changeExt.avi");
+        this.editor.joinFile("test.mp4", "video_test2.mp4", "joinded_video.mp4");
     } 
 }

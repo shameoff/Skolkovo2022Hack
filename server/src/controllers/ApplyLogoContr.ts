@@ -1,7 +1,7 @@
 
 import Editor from '../editor/Editor'
 
-export default class ChangeFExtentionContr {
+export default class ApplyLogoContr {
     private editor: Editor
 
     constructor(editor: Editor) {
@@ -9,6 +9,6 @@ export default class ChangeFExtentionContr {
     }
 
     execute() {
-        this.editor.changeFExtention("test.mp4", "changeExt.avi");
+        this.editor.applyLogo("test.mp4", "video_with_logo.mp4", "main_background.jpg", "50:30");
     } 
 }
