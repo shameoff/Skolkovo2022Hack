@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface TimeLineState {
     isCutting: boolean,
-    timeLineFrames: ArrayBuffer[]
+    duration: number
 }
 
 export const VideoSlice = createSlice({
@@ -15,8 +15,8 @@ export const VideoSlice = createSlice({
             state.isCutting = action.payload
         },
 
-        setFrames: (state, action: PayloadAction<ArrayBuffer[]>) => {
-            state.timeLineFrames = action.payload;
+        setFrames: (state, action: PayloadAction<number>) => {
+            state.duration = action.payload;
         }
     }
 })
