@@ -26,7 +26,7 @@ const TimeLine: FC<TimeLineProps> = () => {
 
   const handleFrameClick = (e: MouseEvent) => {
     /* @ts-ignore */
-    const num = e.target.innerText;
+    const num = parseInt(e.target.innerText);
     if (state.isLeftCutting) {
       dispatch(setleftFrameNum(num))
     }

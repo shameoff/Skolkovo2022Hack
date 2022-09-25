@@ -52,14 +52,14 @@ export const timeLineSlice = createSlice({
                 cleanFrames.push(i);
             }
 
-            for (let i = 1; i < frames.length; ++i) {
+            for (let i = 1; i < state.duration; ++i) {
                 if (!cleanFrames.includes(i)) frames.push(i);
             }
 
-            axios.post(`${constant.host}/video/cut`, frames);
+            axios.post(`${constant.host}/video/cut`, { frames: frames });
         }
     }
 })
 
-export const {setIsLeftCutting, setIsRightCutting, setleftFrameNum, setrightFrameNum, setDuration} = timeLineSlice.actions;
+export const {setIsLeftCutting, setIsRightCutting, setleftFrameNum, setrightFrameNum, setDuration, setFramesResult} = timeLineSlice.actions;
 export default timeLineSlice.reducer;

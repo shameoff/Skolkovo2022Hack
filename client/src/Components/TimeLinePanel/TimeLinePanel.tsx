@@ -4,13 +4,15 @@ import React, { FC } from "react";
 import cutSrcL from "@images/left.png";
 import cutSrcR from "@images/right.png";
 import styles from "./TimeLinePanel.module.scss";
+import { useAppDispatch } from "@redux/hooks";
+import { setFramesResult } from "@redux/store/timeLineSlice";
 
 interface TimeLinePanelProps {}
 
 const TimeLinePanel: FC<TimeLinePanelProps> = () => {
-  const 
+  const dispatch = useAppDispatch();
   const btnClickHandler = () => {
-
+    dispatch(setFramesResult());
   }
  
   return (
