@@ -36,7 +36,7 @@ app.options("*", cors());
 app.use(cors());
 
 app.get("/", (request, response) => {
-    return response.sendFile(path.join(__dirname, "./../../index.html"));
+    return response.sendFile(path.join(__dirname, "./../index.html"));
 });
 
 app.post("/video", upload.any(), (request, response) => {
