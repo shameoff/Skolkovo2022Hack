@@ -21,11 +21,11 @@ const InputInstrument: FC<InstrumentProps> = () => {
             let reader = new FileReader();
             reader.readAsDataURL(file);
 
-            let config = {
-                header: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }
+            // let config = {
+            //     header: {
+            //         'Content-Type': 'multipart/form-data'
+            //     }
+            // }
 
             reader.onload = function(e) {
                 console.log(formData.get('file'));

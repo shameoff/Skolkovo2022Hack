@@ -1,7 +1,7 @@
 
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 
-export default class ChangeFExtentionContr {
+export default class ReformatComp {
 
     private ffmpeg: FFmpeg
     private fetchFile;
@@ -13,13 +13,14 @@ export default class ChangeFExtentionContr {
         this.fs = fs;
     }
 
-    execute(oldFileName: string, newFileName: string) {
+
+    execute(oldFileName: string, newFileName: string, newSize: string) {
         ( async () => {
             await this.ffmpeg.load();
             this.ffmpeg.FS('writeFile', oldFileName, await this.fetchFile('./src/input_files/' + oldFileName));
-            await this.ffmpeg.run('-i', oldFileName, newFileName);
+            await this.ffmpeg.run('-i', oldFileName, "-s", newSize, newFileName);
             await this.fs.promises.writeFile('./src/output_files/' + newFileName, this.ffmpeg.FS('readFile', newFileName));
-            console.log("Component changed extention.");
+            console.log("Component reformated file.");
             process.exit(0);
         })();
     }
