@@ -8,7 +8,7 @@ export default class ChangeFExtentionContr {
         this.editor = editor;
     }
 
-    execute(newSize: string) {
-        this.editor.changeSize(newSize)
+    execute() {
+        this.editor.reformat("test.mp4", "reformated_video.mp4", "1980:1080")
     }
 }

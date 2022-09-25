@@ -1,15 +1,28 @@
 
+import Timeline from 'src/model/Timeline';
 import EditorFactory from './EditorFactory';
 const editorFactory = new EditorFactory;
 
 export default class Editor {
 
-    changeSize(newSize: string) {
-        editorFactory.createChangeSizeComp().execute(newSize);        
+    reformat(oldFileName: string, newFileName: string, newSize: string) {
+        editorFactory.createChangeSizeComp().execute(oldFileName, newFileName, newSize);        
     }
 
-    changeFExtention(newExt: string) {
-        editorFactory.createChangeFExtentionComp().execute(newExt);
+    changeFExtention(oldFileName: string, newFileName: string) {
+        editorFactory.createChangeFExtentionComp().execute(oldFileName, newFileName);
+    }
+
+    applyLogo(oldFileName: string, newFileName: string, logoFileName: string, coordinates: string) {
+        editorFactory.createApplyLogoComp().execute(oldFileName, newFileName, logoFileName, coordinates);
+    }
+
+    joinFile(firstFileName: string, secondFileName: string, outputFileName: string) {
+        editorFactory.createJoinFileComp().execute(firstFileName, secondFileName, outputFileName);
+    }
+
+    cutFile(oldFileName: string, newFileName: string, timelines: Timeline[]) {
+        editorFactory.createCutFileComp().execute(oldFileName, newFileName, timelines);
     }
 
     exit() {
