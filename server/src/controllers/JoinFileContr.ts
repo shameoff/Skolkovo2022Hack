@@ -8,7 +8,7 @@ export default class JoinFileContr {
         this.editor = editor;
     }
 
-    execute() {
+    execute(inputFile: string, secondInputVideo: string, outputFile: string) {
         this.editor.joinFile("test.mp4", "video_test2.mp4", "joinded_video.mp4");
     } 
 }

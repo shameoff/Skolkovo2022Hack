@@ -8,7 +8,7 @@ export default class ApplyLogoContr {
         this.editor = editor;
     }
 
-    execute() {
-        this.editor.applyLogo("test.mp4", "video_with_logo.mp4", "main_background.jpg", "50:30");
+    execute(inputFile: string, outputFile: string, logoFile: string, coordinates: string) {
+        this.editor.applyLogo(inputFile, outputFile, logoFile, coordinates);
     } 
 }

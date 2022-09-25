@@ -1,7 +1,7 @@
 
 import Editor from '../editor/Editor'
 
-export default class ChangeFExtentionContr {
+export default class ExitContr {
     private editor: Editor
 
     constructor(editor: Editor) {

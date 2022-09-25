@@ -9,8 +9,7 @@ export default class CutFileContr {
         this.editor = editor;
     }
 
-    execute() {
-        let timelines = [new Timeline(0, 10), new Timeline(20, 30), new Timeline(40, 50)]
-        this.editor.cutFile("test.mp4", "cut_video.avi", timelines)
+    execute(inputFile: string, outputFile: string, timelines: Timeline[] ) {
+        this.editor.cutFile(inputFile, outputFile, timelines)
     } 
 }

@@ -8,7 +8,7 @@ export default class ChangeFExtentionContr {
         this.editor = editor;
     }
 
-    execute() {
-        this.editor.changeFExtention("test.mp4", "changeExt.avi");
+    execute(inputFile: string, outputFile: string) {
+        this.editor.changeFExtention(inputFile, outputFile);
     } 
 }

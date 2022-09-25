@@ -1,14 +1,14 @@
 
 import Editor from '../editor/Editor'
 
-export default class ChangeFExtentionContr {
+export default class ReformatContr {
     private editor: Editor
 
     constructor(editor: Editor) {
         this.editor = editor;
     }
 
-    execute() {
-        this.editor.reformat("test.mp4", "reformated_video.mp4", "1980:1080")
+    execute(inputFile: string, outputFile: string, formatParams: string) {
+        this.editor.reformat(inputFile, outputFile, formatParams)
     }
 }
